@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: redis-exporter-monitor
+  namespace: iacproject
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: redis-exporter
+  namespaceSelector:
+    matchNames:
+      - iacproject
+  endpoints:
+    - port: metrics
+      path: /metrics
+      interval: 15s
